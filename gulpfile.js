@@ -3,9 +3,11 @@ var gulp   = require('gulp'), 
     sass   = require('gulp-ruby-sass') 
     notify = require("gulp-notify") 
     bower  = require('gulp-bower');
+    uglify = require('gulp-uglify');
 
 var config = {
      sassPath: './resources/sass',
+    jsPath:   './resources/js',
      bowerDir: './bower_components' 
 }
 
@@ -36,9 +38,17 @@ gulp.task('bower', function() { 
          .pipe(gulp.dest(config.bowerDir)) 
 });
 
+
+gulp.task('js', function() {
+  return gulp.src([config.jsPath + '/*.js', config.bowerDir + '/jquery/dist/jquery.min.js', config.bowerDir + '/bootstrap-sass-official/assets/javascripts/bootstrap.min.js'])
+    .pipe(uglify())
+    .pipe(gulp.dest('./web/dist/js'));
+});
+
+
 // Rerun the task when a file changes
  gulp.task('watch', function() {
      gulp.watch(config.sassPath + '/**/*.scss', ['css']); 
 });
 
-  gulp.task('default', ['bower', 'icons', 'css']);
+  gulp.task('default', ['bower', 'icons', 'css', 'js']);
