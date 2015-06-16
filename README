@@ -1,0 +1,11 @@
+### Intro to Gulp
+
+Assuming you already have the standard dev tools (node, npm & bower) installed, all you need to do is checkout this codebase and then run:
+
+$ ./install.sh
+
+All you do then is run:
+
+$ gulp
+
+All bootsrap and fontawesome and anything from resources/sass/style.scss will be included in web/dist/css/style.css

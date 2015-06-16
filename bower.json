@@ -1,0 +1,23 @@
+{
+  "name": "gulp-demo",
+  "version": "0.0.1",
+  "authors": [
+    "Bobby DeVeaux <bobby@dvomedia.net>"
+  ],
+  "moduleType": [
+    "amd",
+    "node"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap-sass-official": "~3.3.5",
+    "fontawesome": "~4.3.0"
+  }
+}
