@@ -54,9 +54,6 @@ $app->before(function (Request $request) use ($app) {
     return true;
 });
 
-
-
-
 $app->get('/', "controller.index:indexAction");
 $app->get('/login', "controller.login:indexAction");
 $app->post('/login', "controller.login:loginAction");
