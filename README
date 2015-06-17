@@ -4,8 +4,8 @@ Assuming you already have the standard dev tools (node, npm & bower) installed, 
 
 $ ./install.sh
 
-All you do then is run:
+Done.
 
-$ gulp
+All bootstrap and fontawesome and anything from resources/sass/style.scss will be included in web/dist/css/style.css.
 
-All bootsrap and fontawesome and anything from resources/sass/style.scss will be included in web/dist/css/style.css
+Jquery 2.1.4 and any other js (resources/js/*.js) will go into web/dist/js/*

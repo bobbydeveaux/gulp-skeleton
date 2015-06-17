@@ -2,4 +2,7 @@
 npm install
 
 # calls bower, which will use bower.json
-gulp bower
+gulp
+
+# Gets all the composers
+composer install
