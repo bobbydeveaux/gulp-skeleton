@@ -9,7 +9,11 @@ use Symfony\Component\HttpFoundation\Response;
 class IndexController
 {
 
+    /**
+     * The App.
+     */
     protected $app;
+
     /**
      * Constructor.
      *

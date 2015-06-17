@@ -5,9 +5,8 @@ require_once __DIR__.'/bootstrap.php';
 use Silex\Application;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use DVO\Provider\PdoServiceProvider;
 
-$app            = new Application();
+$app = new Application();
 
 $app['guzzle.client'] = $app->share(function(){
     return new GuzzleHttp\Client(
@@ -21,7 +20,7 @@ $app->register(new Igorw\Silex\ConfigServiceProvider(
     __DIR__."/../config/" . APPLICATION_ENV . ".json"
 ));
 
-// setup the hit controller
+// setup the index controller
 $app['controller.index'] = $app->share(function() use ($app) {
     return new DVO\Controller\IndexController($app);
 });
@@ -30,7 +29,6 @@ $app['controller.index'] = $app->share(function() use ($app) {
 $app['controller.login'] = $app->share(function() use ($app) {
     return new DVO\Controller\LoginController($app);
 });
-
 
 // Twig stuff
 $app->register(new Silex\Provider\TwigServiceProvider(), array(

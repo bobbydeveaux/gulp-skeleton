@@ -9,7 +9,11 @@ use Symfony\Component\HttpFoundation\Response;
 class LoginController
 {
 
+    /**
+     * The App.
+     */
     protected $app;
+
     /**
      * Constructor.
      *
@@ -44,6 +48,13 @@ class LoginController
         return $app['twig']->render('login.twig.html', $data);
     }
 
+    /**
+     * Handles the HTTP POST.
+     *
+     * @param Request     $request The request.
+     * @param Application $app     The app.
+     *
+     */
     public function loginAction(Request $request, Application $app)
     {
         $email    = $request->request->get('email');
@@ -58,6 +69,13 @@ class LoginController
 
     }
 
+    /**
+     * Handles the HTTP GET.
+     *
+     * @param Request     $request The request.
+     * @param Application $app     The app.
+     *
+     */
     public function logoutAction(Request $request, Application $app)
     {
         $app['session']->clear();
