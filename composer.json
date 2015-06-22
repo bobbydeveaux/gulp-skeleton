@@ -1,7 +1,7 @@
 {
     "name": "dvomedia/gulp-skeleton",
     "description": "A pre-configured skeleton for using Gulp, Silex & Twig",
-    "license": "GPL",
+    "license": "GNU",
     "type": "project",
     "minimum-stability": "dev",
     "require": {
