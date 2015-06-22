@@ -10,7 +10,7 @@ Assuming you already have the standard dev tools (node, npm & bower, bower) inst
 
 $ ./install.sh
 
-Done.
+Done
 
 All bootstrap and fontawesome and anything from resources/sass/style.scss will be included in web/dist/css/style.css.
 
