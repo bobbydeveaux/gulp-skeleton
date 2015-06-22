@@ -36,7 +36,7 @@ $app->register(new Silex\Provider\TwigServiceProvider(), array(
 ));
 
 
-// Use the sesion service provider
+// Use the session service provider
 $app->register(new Silex\Provider\SessionServiceProvider());
 
 $app->before(function (Request $request) use ($app) {
