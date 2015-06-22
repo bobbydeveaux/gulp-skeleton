@@ -1,4 +1,8 @@
 {
+    "name": "dvomedia/gulp-skeleton",
+    "description": "A pre-configured skeleton for using Gulp, Silex & Twig",
+    "license": "GPL",
+    "type": "project",
     "minimum-stability": "dev",
     "require": {
         "silex/silex": "1.0.*@dev",
@@ -11,6 +15,7 @@
     },
     "require-dev": {
         "squizlabs/php_codesniffer": "1.*",
-        "phpunit/phpunit": "3.7.*"
+        "phpunit/phpunit": "3.7.*",
+        "phpspec/phpspec": "*"
     }
 }

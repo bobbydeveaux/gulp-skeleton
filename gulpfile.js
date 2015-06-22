@@ -1,9 +1,10 @@
 
-var gulp   = require('gulp'), 
+var gulp   = require('gulp')
     sass   = require('gulp-ruby-sass') 
     notify = require("gulp-notify") 
-    bower  = require('gulp-bower');
-    uglify = require('gulp-uglify');
+    bower  = require('gulp-bower')
+    uglify = require('gulp-uglify')
+    browserSync = require('browser-sync').create();
 
 var config = {
      sassPath: './resources/sass',
@@ -45,6 +46,11 @@ gulp.task('js', function() {
     .pipe(gulp.dest('./web/dist/js'));
 });
 
+gulp.task('browser-sync', function() {
+    browserSync.init({
+        proxy: "http://gulp-skeleton.local"
+    });
+});
 
 // Rerun the task when a file changes
  gulp.task('watch', function() {
