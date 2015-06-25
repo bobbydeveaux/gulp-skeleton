@@ -36,6 +36,4 @@ class IndexController
 
         return $app['twig']->render('home.twig.html', $data);
     }
-
-
 }

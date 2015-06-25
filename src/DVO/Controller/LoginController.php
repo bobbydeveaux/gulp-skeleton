@@ -82,5 +82,4 @@ class LoginController
 
         return $app->redirect('/');
     }
-
 }

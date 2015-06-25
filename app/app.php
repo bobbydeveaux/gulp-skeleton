@@ -30,6 +30,11 @@ $app['controller.login'] = $app->share(function() use ($app) {
     return new DVO\Controller\LoginController($app);
 });
 
+// setup the login controller
+$app['controller.test'] = $app->share(function() use ($app) {
+    return new DVO\Controller\TestController($app);
+});
+
 // Twig stuff
 $app->register(new Silex\Provider\TwigServiceProvider(), array(
     'twig.path' => __DIR__.'/views',
@@ -58,5 +63,8 @@ $app->get('/', "controller.index:indexAction");
 $app->get('/login', "controller.login:indexAction");
 $app->post('/login', "controller.login:loginAction");
 $app->get('/logout', "controller.login:logoutAction" );
+
+$app->get('/test/rpc', "controller.test:rpcAction" );
+$app->get('/test/rest', "controller.test:restAction" );
 
 return $app;
