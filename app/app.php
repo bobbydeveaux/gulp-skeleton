@@ -6,6 +6,11 @@ use Silex\Application;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
+use PhpAmqpLib\Connection\AMQPConnection;
+use PhpAmqpLib\Message\AMQPMessage;
+
+use DVO\RpcClient;
+
 $app = new Application();
 
 $app['guzzle.client'] = $app->share(function(){
@@ -14,6 +19,20 @@ $app['guzzle.client'] = $app->share(function(){
             'headers'  => ['Content-Type' => 'application/json', 'Accept' => 'application/json']]]
     );
 });
+
+$app['amqp.connection'] = $app->share(function() use ($app) {
+    return new AMQPConnection(
+        $app['config']['amqp.host'],
+        $app['config']['amqp.port'],
+        $app['config']['amqp.user'],
+        $app['config']['amqp.pass']
+    );
+});
+
+$app['rpc'] = $app->share(function() use ($app) {
+    return new DVO\RpcClient($app['amqp.connection']);
+});
+
 
 $app->register(new Silex\Provider\ServiceControllerServiceProvider());
 $app->register(new Igorw\Silex\ConfigServiceProvider(
@@ -32,7 +51,7 @@ $app['controller.login'] = $app->share(function() use ($app) {
 
 // setup the login controller
 $app['controller.test'] = $app->share(function() use ($app) {
-    return new DVO\Controller\TestController($app);
+    return new DVO\Controller\TestController($app['rpc']);
 });
 
 // Twig stuff

@@ -17,9 +17,9 @@ class RpcClient
     protected $response;
     protected $corr_id;
 
-    public function __construct()
+    public function __construct(AMQPConnection $connection)
     {
-        $this->connection = new AMQPConnection('localhost', 5672, 'guest', 'guest');
+        $this->connection = $connection;
         $this->channel    = $this->connection->channel();
         list($this->callback_queue, ,) = $this->channel->queue_declare(
             "",
@@ -46,8 +46,16 @@ class RpcClient
         }
     }
 
-    public function call($message)
+    protected function call($method, $path, $data)
     {
+        $body     = json_encode($data);
+        $message  = json_encode([
+            'method'     => $method,
+            'path'       => $path,
+            'parameters' => $data,
+            'content'    => $body
+        ]);
+
         $this->response = null;
         $this->corr_id  = uniqid();
 
@@ -63,5 +71,25 @@ class RpcClient
         }
 
         return $this->response;
+    }
+
+    public function get($path = '/', $data = [])
+    {
+        return $this->call('GET', $path, $data);
+    }
+
+    public function post($path = '/', $data = [])
+    {
+        return $this->call('POST', $path, $data);
+    }
+
+    public function put($path = '/', $data = [])
+    {
+        return $this->call('PUT', $path, $data);
+    }
+
+    public function delete($path = '/', $data = [])
+    {
+        return $this->call('DELETE', $path, $data);
     }
 }
