@@ -1,0 +1,10 @@
+language: php
+
+before_script:
+- gem install sass
+- npm install
+script:
+- gulp bower
+- gulp
+- composer install
+- vendor/bin/phpunit -c app/phpunit.xml
