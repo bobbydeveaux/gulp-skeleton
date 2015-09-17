@@ -49,6 +49,11 @@ $app['controller.login'] = $app->share(function() use ($app) {
     return new DVO\Controller\LoginController($app);
 });
 
+// setup the dashboard controller
+$app['controller.dashboard'] = $app->share(function() use ($app) {
+    return new DVO\Controller\DashboardController($app);
+});
+
 // setup the login controller
 $app['controller.test'] = $app->share(function() use ($app) {
     return new DVO\Controller\TestController($app['rpc']);
@@ -65,8 +70,8 @@ $app->register(new Silex\Provider\SessionServiceProvider());
 
 $app->before(function (Request $request) use ($app) {
 
-    $app['twig']->addGlobal('layout', null);
-    $app['twig']->addGlobal('layout', $app['twig']->loadTemplate('layout.twig.html'));
+    $app['twig']->addGlobal('loggedout_layout', null);
+    $app['twig']->addGlobal('loggedout_layout', $app['twig']->loadTemplate('loggedout_layout.twig.html'));
 
     if (false === in_array($request->get('_route'), array_keys($app['config']['permitted_routes']))) {
         // user has a session, so ignore rest of checks
@@ -75,6 +80,8 @@ $app->before(function (Request $request) use ($app) {
         }
     }
 
+    $app['twig']->addGlobal('loggedin_layout', $app['twig']->loadTemplate('loggedin_layout.twig.html'));
+
     return true;
 });
 
@@ -82,6 +89,8 @@ $app->get('/', "controller.index:indexAction");
 $app->get('/login', "controller.login:indexAction");
 $app->post('/login', "controller.login:loginAction");
 $app->get('/logout', "controller.login:logoutAction" );
+
+$app->get('/dashboard', "controller.dashboard:indexAction");
 
 $app->get('/test/rpc', "controller.test:rpcAction" );
 $app->get('/test/rest', "controller.test:restAction" );

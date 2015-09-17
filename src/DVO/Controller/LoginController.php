@@ -42,7 +42,7 @@ class LoginController
         ];
 
         // username and password is username / password
-        // echo password_hash("password", PASSWORD_BCRYPT, $options)."\n";
+        echo password_hash("password", PASSWORD_BCRYPT, $options)."\n";
 
 
         return $app['twig']->render('login.twig.html', $data);
